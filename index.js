@@ -1,7 +1,11 @@
-const express = require('express');
-
-const app = express();
-
+const customExpress = require('./config/customExpress');
+const connection = require('./database/databaseConnection');
+connection.connect((error) => {
+    if(error) {
+        console.log(error);
+    }else {
+        console.log('database is connected');
+    }
+});
+const app = customExpress();
 app.listen(4545, () => console.log("server running on port 4545"));
-
-app.get('/', (request, response) => response.send('Welcome to Vet API - updated info'));
