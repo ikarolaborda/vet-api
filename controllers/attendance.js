@@ -4,7 +4,7 @@ module.exports = app => {
 
     app.post('/attendance', (request, response) => {
         const attendance = request.body;
-        Attendance.create(attendance);
+        Attendance.create(attendance, response);
         response.send('A POST Method has been called');
     });
 }

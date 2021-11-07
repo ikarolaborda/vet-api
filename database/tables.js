@@ -25,7 +25,7 @@ class Tables {
                 console.log(error);
             }else {
                 console.log('attendance_status successfully created');
-                const insert = "INSERT IGNORE INTO attendance_status (description) VALUES('Pending'), ('Finished'), ('Not Executed'), ('Budget Rejected')";
+                const insert = "REPLACE INTO attendance_status (description) VALUES('Pending'), ('Finished'), ('Not Executed'), ('Budget Rejected')";
                 this.connection.query(insert, (error) => {
                     if(error) {
                         console.log(error);
@@ -46,7 +46,7 @@ class Tables {
                 console.log(error);
             }else  {
                 console.log('service_list successfully created');
-                const insert = "INSERT IGNORE INTO service_list (description) VALUES ('Banho e Tosa'), ('Vacinação Genérica'), ('Vermifugo simples'), ('Cirurgia de baixa complexidade'), ('Cirurgia de Alta Complexidade'), ('Castração Adulto'), ('Castração Filhote'), ('Eutanasia')"
+                const insert = "REPLACE INTO service_list (description) VALUES ('Banho e Tosa'), ('Vacinação Genérica'), ('Vermifugo simples'), ('Cirurgia de baixa complexidade'), ('Cirurgia de Alta Complexidade'), ('Castração Adulto'), ('Castração Filhote'), ('Eutanasia')"
                 this.connection.query(insert, (error) => {
                     if(error) {
                         console.log(error);
