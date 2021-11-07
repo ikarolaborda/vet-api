@@ -1,10 +1,11 @@
 const Attendance = require('../models/attendance');
 module.exports = app => {
-    app.get('/attendance', (request, response) => response.send('Welcome to Vet API - Inside Controller'));
+    app.get('/attendance', (request, response) => {
+        Attendance.show(response);
+    });
 
     app.post('/attendance', (request, response) => {
         const attendance = request.body;
         Attendance.create(attendance, response);
-        response.send('A POST Method has been called');
     });
 }

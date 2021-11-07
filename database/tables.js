@@ -2,10 +2,10 @@ class Tables {
     init(connection) {
         console.log('Tables class has been reached')
         this.connection = connection;
-        this.createAttendances();
+        //this.createAttendances();
     }
 
-    createAttendances() {
+    /* createAttendances() {
         const sql = 'CREATE TABLE IF NOT EXISTS attendances (attendance_id int NOT NULL AUTO_INCREMENT, client_name VARCHAR(200), pet_name VARCHAR (100), service_description int NOT NULL, attendance_status int NOT NULL, attendance_notes TEXT, PRIMARY KEY(attendance_id))';
         this.connection.query(sql, (error) => {
             if(error) {
@@ -25,8 +25,14 @@ class Tables {
                 console.log(error);
             }else {
                 console.log('attendance_status successfully created');
-                const insert = "REPLACE INTO attendance_status (description) VALUES('Pending'), ('Finished'), ('Not Executed'), ('Budget Rejected')";
-                this.connection.query(insert, (error) => {
+                const insert = "INSERT INTO attendance_status (description) SELECT ? FROM DUAL  WHERE NOT EXISTS (SELECT * FROM attendance_status)";
+                const values = [
+                    ['Pending'],
+                    ['Finished'],
+                    ['Not Executed'],
+                    ['Budget Rejected']
+                ]
+                this.connection.query(insert, [values], (error) => {
                     if(error) {
                         console.log(error);
                     }else {
@@ -46,8 +52,18 @@ class Tables {
                 console.log(error);
             }else  {
                 console.log('service_list successfully created');
-                const insert = "REPLACE INTO service_list (description) VALUES ('Banho e Tosa'), ('Vacinação Genérica'), ('Vermifugo simples'), ('Cirurgia de baixa complexidade'), ('Cirurgia de Alta Complexidade'), ('Castração Adulto'), ('Castração Filhote'), ('Eutanasia')"
-                this.connection.query(insert, (error) => {
+                const insert = "INSERT INTO service_list (description) SELECT ? FROM DUAL  WHERE NOT EXISTS (SELECT * FROM service_list)"
+                const values = [
+                    ['Banho e Tosa'],
+                    ['Vacinação Genérica'],
+                    ['Vermifugo Simples'],
+                    ['Cirurgia de baixa complexidade'],
+                    ['Cirurgia de Alta Complexidade'],
+                    ['Castração Adulto'],
+                    ['Castração Filhote'],
+                    ['Eutanasia']
+                ]
+                this.connection.query(insert, [values], (error) => {
                     if(error) {
                         console.log(error);
                     }else {
@@ -58,7 +74,7 @@ class Tables {
                 })
             }
         })
-    }
+    } */
 }
 
 module.exports = new Tables
